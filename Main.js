@@ -10,7 +10,7 @@ window.onload = function() {
   canvas.width = canvasTop.width;
   canvas.height = canvasTop.height;
   ctxTop = canvas.getContext('2d');
-  ctxTop.fillStyle="#FF0000";
+  ctxTop.lineWidth=3;
   canvasRect = canvas.getBoundingClientRect();
 }
 
@@ -20,19 +20,43 @@ window.onload = function() {
 //STATES
 var STATES  = [];
 
-s1 = new State( state_path_handler.getUsaPath(), "usa");
-STATES.push(s1);
+state_ALASKA = new State( state_path_handler.getstate_path_ALASKA(),
+                       "state_ALASKA",
+                       "player1");
+STATES.push(state_ALASKA);
 
+state_NORTHWEST = new State( state_path_handler.getstate_path_NORTHWEST(),
+                       "state_NORTHWEST",
+                       "player2");
+STATES.push(state_NORTHWEST);
+
+state_ALBERTA = new State( state_path_handler.getstate_path_ALBERTA(),
+                       "state_ALBERTA",
+                       "player3");
+STATES.push(state_ALBERTA);
+
+state_ONTARIO = new State( state_path_handler.getstate_path_ONTARIO(),
+                       "state_ONTARIO",
+                       "player1");
+STATES.push(state_ONTARIO);
+
+state_WESTERNUS = new State( state_path_handler.getstate_path_WESTERNUS(),
+                       "state_WESTERNUS",
+                       "player2");
+STATES.push(state_WESTERNUS);
 
 function getClickPosition(e) {
      xPosition = e.clientX - canvasRect.left;
      yPosition = e.clientY - canvasRect.top;
 
-     if(ctxTop.isPointInPath(s1.getPath(), xPosition, yPosition)){
-       console.log("in " + s1.getName());
-     }else console.log("out " + s1.getName());
+     for(var i = 0; i < STATES.length; i++){
+       if(ctxTop.isPointInPath(STATES[i].getPath(), xPosition, yPosition)){
+         console.log("in " + STATES[i].getName());
+       }
+     }
 
-     xPosition = 0;  
+
+     xPosition = 0;
      yPosition = 0;
 }
 
@@ -43,7 +67,9 @@ function update(delta){
 
 function draw(){
       ctxTop.clearRect(0, 0, canvas.width, canvas.height);
-      s1.draw();
+       for(var i = 0; i < STATES.length; i++){
+         STATES[i].draw();
+       }
 }
 
 
