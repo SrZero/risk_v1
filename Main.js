@@ -17,33 +17,45 @@ window.onload = function() {
 //HANDLER PATH CLASS
  state_path_handler = new StatePathHandler();
 
+ player1 = new Player("pippo");
+ player2 = new Player("pluto");
+ player3 = new Player("bob");
+
 //STATES
 var STATES  = [];
 
 state_ALASKA = new State( state_path_handler.getstate_path_ALASKA(),
                        "state_ALASKA",
-                       "player1");
+                       player3);
 STATES.push(state_ALASKA);
 
 state_NORTHWEST = new State( state_path_handler.getstate_path_NORTHWEST(),
                        "state_NORTHWEST",
-                       "player2");
+                       player2);
 STATES.push(state_NORTHWEST);
 
 state_ALBERTA = new State( state_path_handler.getstate_path_ALBERTA(),
                        "state_ALBERTA",
-                       "player3");
+                       player1);
 STATES.push(state_ALBERTA);
 
 state_ONTARIO = new State( state_path_handler.getstate_path_ONTARIO(),
                        "state_ONTARIO",
-                       "player1");
+                       player2);
 STATES.push(state_ONTARIO);
 
 state_WESTERNUS = new State( state_path_handler.getstate_path_WESTERNUS(),
                        "state_WESTERNUS",
-                       "player2");
+                       player3);
 STATES.push(state_WESTERNUS);
+
+
+//once all states are made ,set up their border
+
+for(var i = 0; i < STATES.length; i++){
+  STATES[i].setUpBorders(STATES);
+}
+
 
 function getClickPosition(e) {
      xPosition = e.clientX - canvasRect.left;
@@ -52,12 +64,13 @@ function getClickPosition(e) {
      for(var i = 0; i < STATES.length; i++){
        if(ctxTop.isPointInPath(STATES[i].getPath(), xPosition, yPosition)){
          console.log("in " + STATES[i].getName());
+        console.log("BORDER : " + STATES[i].getBorderStatesList());
        }
      }
-
-
      xPosition = 0;
      yPosition = 0;
+
+
 }
 
 
