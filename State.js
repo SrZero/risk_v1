@@ -2,14 +2,23 @@ class State{
 
   constructor(sate_path, name, player){
     this.sate_path = sate_path;
-    
+
     this.name = name;
     this.player = player;
     this.border_States = [];
     this.player.addState(this);
-
+    this.num_units = 0;
 
   }
+
+  deployUnits (numOfUnitsDeploying){
+    this.num_units += numOfUnitsDeploying;
+  }
+
+  getNumUnits () {
+    return this.num_units;
+  }
+
   //adding state (as obj) to the border list
   setUpBorders (v_STATES) {
     switch (this.name) {

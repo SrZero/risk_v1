@@ -41,7 +41,7 @@ STATES.push(state_ALBERTA);
 
 state_ONTARIO = new State( state_path_handler.getstate_path_ONTARIO(),
                        "state_ONTARIO",
-                       player2);
+                       player3);
 STATES.push(state_ONTARIO);
 
 state_WESTERNUS = new State( state_path_handler.getstate_path_WESTERNUS(),
@@ -55,7 +55,9 @@ STATES.push(state_WESTERNUS);
 for(var i = 0; i < STATES.length; i++){
   STATES[i].setUpBorders(STATES);
 }
-
+player1.setUpStartingUnits();
+player2.setUpStartingUnits();
+player3.setUpStartingUnits();
 
 function getClickPosition(e) {
      xPosition = e.clientX - canvasRect.left;
@@ -63,10 +65,12 @@ function getClickPosition(e) {
 
      for(var i = 0; i < STATES.length; i++){
        if(ctxTop.isPointInPath(STATES[i].getPath(), xPosition, yPosition)){
-         console.log("in " + STATES[i].getName());
-        console.log("BORDER : " + STATES[i].getBorderStatesList());
+        // console.log("in " + STATES[i].getName());
+        console.log("num units : " + STATES[i].getNumUnits());
        }
      }
+     console.log("player1 : " + player1.getListStateOwned());
+
      xPosition = 0;
      yPosition = 0;
 
